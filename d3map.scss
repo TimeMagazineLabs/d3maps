@@ -1,0 +1,21 @@
+.d3map {
+	svg {
+		width: 100%;
+	}
+
+	.state {
+		fill: white;
+		stroke: black;
+		stroke-width: 1px;
+
+		text {
+			fill: black;
+		}
+	}
+
+	.stateLabel {
+		text-anchor: middle;
+		font-size: 14px;
+		fill: black;
+	}
+}
