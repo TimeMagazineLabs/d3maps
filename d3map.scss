@@ -3,13 +3,38 @@
 		width: 100%;
 	}
 
-	.state {
-		fill: white;
+	.state,.county {
 		stroke: black;
-		stroke-width: 1px;
 
 		text {
 			fill: black;
+		}
+	}
+
+	.county {
+		stroke: #808080;
+
+		text {
+			fill: black;
+		}
+	}
+
+	.stateMap {
+		.state {
+			fill: white;
+			stroke-width: 1px;
+		}
+	}
+
+	.countyMap {
+		.county {
+			fill: white;
+			stroke-width: 1px;
+		}
+
+		.state {			
+			fill: none;
+			stroke-width: 2px;
 		}
 	}
 
