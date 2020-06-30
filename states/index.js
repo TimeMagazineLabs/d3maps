@@ -45,7 +45,7 @@ const draw = function(selector, data, opts) {
 
 	const map = svg.append("g").attr("class", "stateMap");
 
-	let insets = ["NH", "VT", "MA", "CT", "RI", "NJ", "DE", "DC"];
+	let insets = [ "NH", "VT", "MA", "CT", "RI", "NJ", "DE", "DC" ];
 
 	var states_g = map.selectAll(".state")
 		.data(states)
@@ -55,7 +55,6 @@ const draw = function(selector, data, opts) {
 		.attr("id", function(d) {
 			d.center = path.centroid(d);
 			d.area = path.area(d);
-			console.log(d.properties.STUSPS, d.area);
 			return "state_" + d.properties.STUSPS
 		});
 
