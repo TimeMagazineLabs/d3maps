@@ -37,11 +37,13 @@ const draw = function(selector, data, opts) {
 
 	const base = elasticSVG(selector, {
 		width: 960,
-		aspect: 0.55,
+		aspect: 0.54,
 		resize: "auto"
 	});
 
 	const svg = select(base.svg);
+
+	svg.append("defs");
 
 	const map = svg.append("g").attr("class", "stateMap");
 
@@ -59,11 +61,6 @@ const draw = function(selector, data, opts) {
 		});
 
 	states_g.append("path").attr("d", path);
-	// states_g.append("text")
-	// 	.attr("x", d => d.center[0])
-	// 	.attr("y", d => d.center[1])
-	// 	.text(d => insets.indexOf(d.properties.STUSPS) == -1 ? d.properties.STUSPS : "")
-	// 	.attr("class", "stateLabel");
 
 	let side = 60;
 	let x = 895;
