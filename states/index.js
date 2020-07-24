@@ -37,7 +37,7 @@ const draw = function(selector, data, opts) {
 
 	const base = elasticSVG(selector, {
 		width: 960,
-		aspect: 0.54,
+		aspect: 0.52,
 		resize: "auto"
 	});
 
@@ -64,7 +64,7 @@ const draw = function(selector, data, opts) {
 
 	let side = 60;
 	let x = 895;
-	let y = 30;		
+	let y = 15;		
 	let font_size = 27;
 
 	insets.forEach((d, i) => {

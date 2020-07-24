@@ -1,5 +1,6 @@
 dependencies:
   d3-geo: 1.12.0
+  d3-geo-projection: 2.9.0
   d3-selection: 1.4.1
   d3-zoom: 1.8.3
   elastic-svg: 0.1.0
@@ -33,6 +34,16 @@ packages:
     dev: false
     resolution:
       integrity: sha512-SZ/lVU7LRXafqp7XtIcBdxnWl8yyLpgOmzAk0mWBI9gXNzLDx5ybZgnRbH9dN/yY5tzVBqCQ9avltSnqVwessQ==
+  /d3-geo-projection/2.9.0:
+    dependencies:
+      commander: 2.20.3
+      d3-array: 1.2.4
+      d3-geo: 1.12.0
+      resolve: 1.17.0
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-ZULvK/zBn87of5rWAfFMc9mJOipeSo57O+BBitsKIXmU4rTVAnX1kSsJkE0R+TxY8pGNoM1nbyRRE7GYHhdOEQ==
   /d3-geo/1.12.0:
     dependencies:
       d3-array: 1.2.4
@@ -78,6 +89,16 @@ packages:
     dev: false
     resolution:
       integrity: sha512-35w9ZYl4zGasBMX42WLVFeywOLLhawuIb2NHGK1FrTvqsoEJG6Yo5dmMAb8AhjN8sWdo7SQwGn7dFjwgF01gWA==
+  /path-parse/1.0.6:
+    dev: false
+    resolution:
+      integrity: sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
+  /resolve/1.17.0:
+    dependencies:
+      path-parse: 1.0.6
+    dev: false
+    resolution:
+      integrity: sha512-ic+7JYiV8Vi2yzQGFWOkiZD5Z9z7O2Zhm9XMaTxdJExKasieFCr+yXZ/WmXsckHiKl12ar0y6XiXDx3m4RHn1w==
   /topojson-client/3.1.0:
     dependencies:
       commander: 2.20.3
@@ -87,6 +108,7 @@ packages:
       integrity: sha512-605uxS6bcYxGXw9qi62XyrV6Q3xwbndjachmNxu8HWTtVPxZfEJN9fd/SZS1Q54Sn2y0TMyMxFj/cJINqGHrKw==
 specifiers:
   d3-geo: ^1.12.0
+  d3-geo-projection: ^2.9.0
   d3-selection: ^1.4.1
   d3-zoom: ^1.8.3
   elastic-svg: ^0.1.0
