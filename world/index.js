@@ -7,18 +7,18 @@ import elasticSVG from 'elastic-svg';
 
 require("../d3map.scss");
 
+const WIDTH = 960;
+const HEIGHT = 500;
+const ASPECT = HEIGHT / WIDTH;
+
 const topology = require("../topojson/world-110m.topo.json");
 const projection = geoRobinson();
 
 let k = projection.scale();
 projection.scale(k * 1.1);
 
-projection.clipExtent([[0, 10], [960, 440]]);
-projection.translate([460, 250]);
-
-
-const WIDTH = 960;
-const ASPECT = 440 / 960;
+projection.clipExtent([[0, 0], [WIDTH, HEIGHT - 10]]);
+projection.translate([460, 300]);
 
 const path = geoPath().projection(projection);
 let countries = topojson.feature(topology, topology.objects.countries).features;
@@ -52,6 +52,7 @@ const draw = function(selector, data, opts) {
 	const base = elasticSVG(selector, {
 		width: WIDTH,
 		aspect: ASPECT,
+		// aspect: 0.55,
 		resize: "auto"
 	});
 

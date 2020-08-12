@@ -5,8 +5,13 @@ import elasticSVG from 'elastic-svg';
 
 require("../d3map.scss");
 
+const WIDTH = 960;
+const HEIGHT = 500;
+const ASPECT = HEIGHT / WIDTH;
+
 const topology = require("../topojson/states.topo.json");
 const projection = geoAlbersUsa();
+
 const path = geoPath().projection(projection);
 
 let states = topojson.feature(topology, topology.objects.states).features;
@@ -37,7 +42,7 @@ const draw = function(selector, data, opts) {
 
 	const base = elasticSVG(selector, {
 		width: 960,
-		aspect: 0.52,
+		aspect: ASPECT,
 		resize: "auto"
 	});
 
