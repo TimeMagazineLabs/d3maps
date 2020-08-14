@@ -4,22 +4,21 @@ import { zoom } from 'd3-zoom';
 const topojson = require('topojson-client');
 import elasticSVG from 'elastic-svg';
 
-let topologyCounties = require("../topojson/counties_nyc.topo.json");
-let fipsLookup = require("./fips.json");
+require("../d3map.scss");
 
+const WIDTH = 960;
+const HEIGHT = 500;
+const ASPECT = HEIGHT / WIDTH;
+
+const fipsLookup = require("./fips.json");
+const topologyCounties = require("../topojson/counties_nyc.topo.json");
 const projection = geoAlbersUsa();
 const path = geoPath().projection(projection);
 
 const draw = function(selector, data, opts) {
+	data = data || null;
 	opts = opts || {};
 	opts.key = opts.key || "abbr";
-
-	let dataByKey = {};
-
-	data.forEach(d => {
-		let key = d[opts.key];
-		dataByKey[key] = d;
-	});
 
 	let counties = topojson.feature(topologyCounties, topologyCounties.objects.counties).features;
 
@@ -48,19 +47,25 @@ const draw = function(selector, data, opts) {
 		county.neighbors = neighbors[c].map(i => counties[i]);
 	});
 
-	if (Object.values(dataByKey).length == 0) {
-		console.log("Invalid key for either state abbreviation or state name in data");
-	} else {
-		counties.forEach(d => {
-			d.data = dataByKey[d.properties.fips];
+	let dataByKey = {};
+
+	if (data) {
+		data.forEach(d => {
+			let key = d[opts.key];
+			dataByKey[key] = d;
 		});
+
+		if (Object.values(dataByKey).length == 0) {
+			console.log("Invalid key for either state abbreviation or state name in data");
+		} else {
+			counties.forEach(d => {
+				d.data = dataByKey[d.properties.fips];
+			});
+		}
 	}
 
 	select(selector).append("div").attr("class", "d3map");
 	selector += " .d3map";
-
-	const WIDTH = 960;
-	const ASPECT = 0.55;
 
 	const base = elasticSVG(selector, {
 		width: WIDTH,
@@ -69,7 +74,6 @@ const draw = function(selector, data, opts) {
 	});
 
 	const svg = select(base.svg);
-
 	const map = svg.append("g").attr("class", "countyMap");
 
 	let g_counties = map.append("g").attr("class", "counties");
@@ -126,7 +130,8 @@ const draw = function(selector, data, opts) {
 		g: g_counties,
 		svg: svg,
 		topology: topologyCounties,
-		features: counties
+		features: counties,
+		projection: projection
 	}
 }
 

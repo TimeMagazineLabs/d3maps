@@ -3,8 +3,6 @@ import { geoPath, geoAlbersUsa } from 'd3-geo';
 const topojson = require('topojson-client');
 import elasticSVG from 'elastic-svg';
 
-require("../d3map.scss");
-
 const WIDTH = 960;
 const HEIGHT = 500;
 const ASPECT = HEIGHT / WIDTH;
