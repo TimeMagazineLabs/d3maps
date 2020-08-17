@@ -131,7 +131,9 @@ const draw = function(selector, data, opts) {
 		svg: svg,
 		topology: topologyCounties,
 		features: counties,
-		projection: projection
+		projection: projection,
+		width: WIDTH,
+		height: HEIGHT
 	}
 }
 
