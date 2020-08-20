@@ -6,9 +6,9 @@ import elasticSVG from 'elastic-svg';
 
 require("../d3map.scss");
 
-const WIDTH = 960;
-const HEIGHT = 500;
-const ASPECT = HEIGHT / WIDTH;
+let WIDTH = 960;
+let HEIGHT = 500;
+let ASPECT = HEIGHT / WIDTH;
 
 const fipsLookup = require("./fips.json");
 const topologyCounties = require("../topojson/counties_nyc.topo.json");
@@ -19,6 +19,11 @@ const draw = function(selector, data, opts) {
 	data = data || null;
 	opts = opts || {};
 	opts.key = opts.key || "abbr";
+
+	if (opts.hasOwnProperty("height")) {
+		HEIGHT = opts.height;
+		ASPECT = HEIGHT / WIDTH;
+	}
 
 	let counties = topojson.feature(topologyCounties, topologyCounties.objects.counties).features;
 
@@ -74,13 +79,16 @@ const draw = function(selector, data, opts) {
 	});
 
 	const svg = select(base.svg);
+	svg.append("defs");
 	const map = svg.append("g").attr("class", "countyMap");
 
-	let g_counties = map.append("g").attr("class", "counties");
-	let g_states = map.append("g").attr("class", "states");
-	let g_extras = map.append("g").attr("class", "mapExtras");
+	let g = {
+		counties: map.append("g").attr("class", "counties"),
+		states: map.append("g").attr("class", "states"),
+		extras: map.append("g").attr("class", "mapExtras")
+	};
 
-	g_counties.selectAll(".county")
+	g.counties.selectAll(".county")
 		.data(counties)
 		.enter()
 		.append("path")
@@ -98,12 +106,12 @@ const draw = function(selector, data, opts) {
 			}
 			/*
 			d.neighbors.forEach(n => {
-				g_counties.select("#county_" + n.properties.fips).style("fill", "yellow")
+				g.counties.select("#county_" + n.properties.fips).style("fill", "yellow")
 			});
 			*/
 		});
 
-	g_states.selectAll(".state")
+	g.states.selectAll(".state")
 		.data(computedStates)
 		.enter()
 		.append("path")
@@ -115,19 +123,21 @@ const draw = function(selector, data, opts) {
     	.translateExtent([ [0,0], [WIDTH, WIDTH * ASPECT ]])
     	.on('zoom', function(d) {
     		let k = event.transform.k;       	
-        	g_counties.attr("transform", event.transform);
-        	g_counties.selectAll(".county").style("stroke-width", 1 / k);
+        	g.counties.attr("transform", event.transform);
+        	g.counties.selectAll(".county").style("stroke-width", 1 / k);
 
-        	g_states.attr("transform", event.transform);
-        	g_states.selectAll(".state").style("stroke-width", 2 / k);
+        	g.states.attr("transform", event.transform);
+        	g.states.selectAll(".state").style("stroke-width", 2 / k);
 
-        	g_extras.attr("transform", event.transform);
+        	g.extras.attr("transform", event.transform);
 		});
 
-    svg.call(countyZoom);
+    if (!opts.noZoom) {
+		svg.call(countyZoom);
+    }
 
 	return {
-		g: g_counties,
+		g: g,
 		svg: svg,
 		topology: topologyCounties,
 		features: counties,
