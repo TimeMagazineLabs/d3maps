@@ -74,6 +74,8 @@ const draw = function(selector, data, opts) {
 	});
 
 	const svg = select(base.svg);
+	svg.append("defs");
+
 	const map = svg.append("g").attr("class", "countyMap");
 
 	let g_counties = map.append("g").attr("class", "counties");
