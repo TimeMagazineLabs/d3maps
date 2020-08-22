@@ -143,7 +143,8 @@ const draw = function(selector, data, opts) {
 		features: counties,
 		projection: projection,
 		width: WIDTH,
-		height: HEIGHT
+		height: HEIGHT,
+		aspect: ASPECT
 	}
 }
 
