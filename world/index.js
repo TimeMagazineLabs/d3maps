@@ -84,9 +84,14 @@ const draw = function(selector, data, opts) {
     		scale = k; 	
         	countries_g.attr("transform", event.transform);
         	countries_g.style("stroke-width", 1 / k);
+        	if (opts.onZoom) {
+        		opts.onZoom(k);
+        	}
 		});
 
-    svg.call(worldZoom);
+    if (!opts.noZoom) {
+		svg.call(worldZoom);
+    }
 	return svg;
 }
 
