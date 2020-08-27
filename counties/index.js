@@ -80,12 +80,12 @@ const draw = function(selector, data, opts) {
 
 	const svg = select(base.svg);
 	svg.append("defs");
-	const map = svg.append("g").attr("class", "countyMap");
+	const map = svg.append("g").attr("class", "countyMap").attr("id", "countyMap");
 
 	let g = {
-		counties: map.append("g").attr("class", "counties"),
-		states: map.append("g").attr("class", "states"),
-		extras: map.append("g").attr("class", "mapExtras")
+		counties: map.append("g").attr("class", "counties").attr("id", "g_counties"),
+		states: map.append("g").attr("class", "states").attr("id", "g_states"),
+		extras: map.append("g").attr("class", "mapExtras").attr("id", "g_extras")
 	};
 
 	g.counties.selectAll(".county")
@@ -143,7 +143,8 @@ const draw = function(selector, data, opts) {
 		features: counties,
 		projection: projection,
 		width: WIDTH,
-		height: HEIGHT
+		height: HEIGHT,
+		aspect: ASPECT
 	}
 }
 

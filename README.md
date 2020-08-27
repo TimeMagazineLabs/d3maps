@@ -1,7 +1,14 @@
 # d3maps
+
+v0.0.3
+
 Ready-made maps for US
 
-# Get Counties
+## Generating the `.topo.json` files
+
+This isn't something you need to do since the TopoJSON files are baked in. Merely a documentation. States are imputed from counties.
+
+### Counties
 
 	mkdir temp && cd temp
 	wget https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_county_20m.zip
@@ -10,7 +17,7 @@ Ready-made maps for US
 	cd ..
 	rm -rf temp
 
-# Get World
+### World
 
 	mkdir temp && cd temp
 	wget https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_map_units.zip
