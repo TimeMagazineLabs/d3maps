@@ -21,10 +21,10 @@
   },
   "homepage": "https://github.com/TimeMagazine/d3maps#readme",
   "dependencies": {
-    "d3-geo": "^1.12.0",
-    "d3-geo-projection": "^2.9.0",
-    "d3-selection": "^1.4.1",
-    "d3-zoom": "^1.8.3",
+    "d3-geo": "^2.0.1",
+    "d3-geo-projection": "^3.0.0",
+    "d3-selection": "^2.0.0",
+    "d3-zoom": "^2.0.0",
     "elastic-svg": "^0.1.0",
     "topojson-client": "^3.1.0"
   }

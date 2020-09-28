@@ -1,4 +1,4 @@
-import { select, selectAll, event } from 'd3-selection'; // Common convenience. Requires `npm install d3 --save`
+import { select, selectAll } from 'd3-selection'; // Common convenience. Requires `npm install d3 --save`
 import { geoPath, geoAlbersUsa } from 'd3-geo';
 import { zoom } from 'd3-zoom';
 const topojson = require('topojson-client');
@@ -121,15 +121,15 @@ const draw = function(selector, data, opts) {
 	let countyZoom = zoom()
     	.scaleExtent([1, 12])
     	.translateExtent([ [0,0], [WIDTH, WIDTH * ASPECT ]])
-    	.on('zoom', function(d) {
-    		let k = event.transform.k;       	
-        	g.counties.attr("transform", event.transform);
+    	.on('zoom', function(e) {
+    		let k = e.transform.k;       	
+        	g.counties.attr("transform", e.transform);
         	g.counties.selectAll(".county").style("stroke-width", 1 / k);
 
-        	g.states.attr("transform", event.transform);
+        	g.states.attr("transform", e.transform);
         	g.states.selectAll(".state").style("stroke-width", 2 / k);
 
-        	g.extras.attr("transform", event.transform);
+        	g.extras.attr("transform", e.transform);
 		});
 
     if (!opts.noZoom) {

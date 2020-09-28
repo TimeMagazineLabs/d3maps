@@ -1,4 +1,4 @@
-import { select, selectAll, event } from 'd3-selection'; // Common convenience. Requires `npm install d3 --save`
+import { select, selectAll } from 'd3-selection'; // Common convenience. Requires `npm install d3 --save`
 import { geoPath, geoAlbersUsa } from 'd3-geo';
 const topojson = require('topojson-client');
 import elasticSVG from 'elastic-svg';

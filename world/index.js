@@ -1,4 +1,4 @@
-import { select, selectAll, event } from 'd3-selection'; // Common convenience. Requires `npm install d3 --save`
+import { select, selectAll } from 'd3-selection'; // Common convenience. Requires `npm install d3 --save`
 import { geoPath } from 'd3-geo';
 import { geoRobinson } from 'd3-geo-projection';
 import { zoom } from 'd3-zoom';
@@ -79,10 +79,10 @@ const draw = function(selector, data, opts) {
 	let worldZoom = zoom()
     	.scaleExtent([1, 12])
     	.translateExtent([ [0,0], [WIDTH, WIDTH * ASPECT ]])
-    	.on('zoom', function(d) {
-    		let k = event.transform.k;
+    	.on('zoom', function(e, d) {
+    		let k = e.transform.k;
     		scale = k; 	
-        	countries_g.attr("transform", event.transform);
+        	countries_g.attr("transform", e.transform);
         	countries_g.style("stroke-width", 1 / k);
         	if (opts.onZoom) {
         		opts.onZoom(k);
