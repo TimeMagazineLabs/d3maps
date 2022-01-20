@@ -1,5 +1,4 @@
-import { select, selectAll } from 'd3-selection'; // Common convenience. Requires `npm install d3 --save`
-import { geoPath, geoAlbersUsa } from 'd3-geo';
+import { select, selectAll, zoom, geoPath, geoAlbersUsa } from 'd3';
 const topojson = require('topojson-client');
 import elasticSVG from 'elastic-svg';
 
@@ -39,7 +38,7 @@ const draw = function(selector, data, opts) {
 	selector += " .d3map";
 
 	const base = elasticSVG(selector, {
-		width: 960,
+		width: WIDTH,
 		aspect: ASPECT,
 		resize: "auto"
 	});

@@ -1,7 +1,5 @@
-import { select, selectAll } from 'd3-selection'; // Common convenience. Requires `npm install d3 --save`
-import { geoPath } from 'd3-geo';
+import { select, selectAll, zoom, geoPath } from 'd3';
 import { geoRobinson } from 'd3-geo-projection';
-import { zoom } from 'd3-zoom';
 const topojson = require('topojson-client');
 import elasticSVG from 'elastic-svg';
 
@@ -79,9 +77,13 @@ const draw = function(selector, data, opts) {
 	let worldZoom = zoom()
     	.scaleExtent([1, 12])
     	.translateExtent([ [0,0], [WIDTH, WIDTH * ASPECT ]])
+    	.filter(function(e) {
+    		// console.log("Filter", e.type);
+    		return !/mouse|click/.test(e.type);
+    	})
     	.on('zoom', function(e, d) {
     		let k = e.transform.k;
-    		scale = k; 	
+    		scale = k;
         	countries_g.attr("transform", e.transform);
         	countries_g.style("stroke-width", 1 / k);
         	if (opts.onZoom) {
@@ -95,4 +97,8 @@ const draw = function(selector, data, opts) {
 	return svg;
 }
 
-export { draw }
+const getPath = function() {
+	return path;
+}
+
+export { draw, getPath }
